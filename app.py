@@ -31,13 +31,13 @@ X_test_vec = vectorizer.transform(X_test)
 
 # HERE WE TRAIN 3 MODELS: LOGISTIC REGRESSION, SVM, NAIVE BAYES
 # so we can compare and see which one is best
-# (requirement man gud ning sir carlo haha if i remember correctly)
+# (requirement man gud ni haha if i remember correctly)
 
 # Logistic Regression
-#logreg = LogisticRegression(max_iter=2000)
-#logreg.fit(X_train_vec, y_train)
-#logreg_pred = logreg.predict(X_test_vec)
-#logreg_acc = accuracy_score(y_test, logreg_pred)
+logreg = LogisticRegression(max_iter=2000)
+logreg.fit(X_train_vec, y_train)
+logreg_pred = logreg.predict(X_test_vec)
+logreg_acc = accuracy_score(y_test, logreg_pred)
 
 # SVM / Support Vector Machine
 svm = LinearSVC()
@@ -46,17 +46,26 @@ svm_pred = svm.predict(X_test_vec)
 svm_acc = accuracy_score(y_test, svm_pred)
 
 # Naive Bayes
-#nb = MultinomialNB()
-#nb.fit(X_train_vec, y_train)
-#nb_pred = nb.predict(X_test_vec)
-#nb_acc = accuracy_score(y_test, nb_pred)
+nb = MultinomialNB()
+nb.fit(X_train_vec, y_train)
+nb_pred = nb.predict(X_test_vec)
+nb_acc = accuracy_score(y_test, nb_pred)
 
 # Print accuracies
-#print("Logistic Regression:", logreg_acc)
-#print("Linear SVM:", svm_acc)
-#print("Naive Bayes:", nb_acc)
+print("Logistic Regression:", logreg_acc)
+print("Linear SVM:", svm_acc)
+print("Naive Bayes:", nb_acc)
 
-# we choose SVM as the best model based on accuracy
+# we choose SVM as the best model based on accuracy yes yes
+
+# Let's visualize the confusion matrix of the best model
+cm = confusion_matrix(y_test, svm_pred)
+plt.figure(figsize=(6,4))
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
+plt.title("Confusion Matrix – SVM")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.show()
 
 # And also print the classification report
 print(classification_report(y_test, svm_pred))
